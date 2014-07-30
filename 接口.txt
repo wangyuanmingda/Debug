@@ -1,0 +1,93 @@
+TB_MEMBERINFO：     
+
+   public static TB_MEMBERINFO Login(decimal id, string password)
+            //Login方法，网页端会员登陆时调用，参数为用户ID及密码，返回带有指定会员信息的TB_MEMBERINFO类
+调用实例：user = TB_MEMBERINFO.Login(1, "qwer");
+
+   public void prisist()
+            //需要创建新会员时，先声明一个TB_MEMBERINFO类成员，记录所需的新信息，然后调用persist方法
+ID在接口层实现自增，不需要指定ID号，score值默认为0
+方法结束后，user对象内的MEMBER_ID值更新为正确的值
+调用示例：TB_MEMBERINFO user = new TB_MEMBERINFO();
+		/*设置属性*/
+		user.persist();
+ public void delete()
+public static void delete(decimal id)
+public void update()
+public void setNewScore(decimal i)
+修改积分，传入参数为积分变化量，如增加5分：i=5； 减少3分：i=-3；
+public void setNewScore(decimal i)
+修改积分，传入参数为积分新值（好像没什么必要）
+
+
+
+TB_ADMININFO：
+
+        public static TB_ADMININFO Login(decimal id, string password)
+        //Login方法，客户端管理员登陆时调用，参数为管理员ID及密码，返回带有指定管理员信息的TB_ADMININFO类，其中包含了管辖影院的信息
+调用示例：同user
+public void persist()
+将一个新的管理员保存到数据库中
+public static void delete(decimal id)
+删除一个管理员，传入参数为管理员ID
+public void update()
+更新管理员信息，采用了delete+persist的方式
+
+
+TB_THEATERINFO：
+
+
+        public void persist()
+        //需要创建新影院时，先声明一个TB_THEATERINFO类成员，记录所需的新信息，然后调用persist方法
+示例：同user
+
+
+        public static List<TB_THEATERINFO> SearchByName(string name)
+            //网页需要通过名字搜影院时调用，参数为搜索关键字，返回带有所有符合结果的List容器
+示例：List<TB_THEATERINFO> result = TB_THEATERINFO.SearchByName(“CGV”);
+
+
+        public static List<TB_THEATERINFO> SearchByAddress(string address)
+        //网页需要通过地址搜影院时调用，参数为搜索关键字，返回带有所有符合结果的List容器
+示例：同上
+
+public decimal GetSellSum()
+        //返回此影院的总营业额
+public static DataColumn getAllName()
+返回一个DataColumn，包含所有影院的名字
+public static DataTable GetAllTheater()
+返回一个DataTable，包含所有影院的信息
+删、改尚未实现
+
+
+TB_MOVIEINFO：
+
+        public static List<TB_MOVIEINFO> GetLatestMovie(int num)
+            //网页端需要显示最新电影时调用，输入参数为需要获得的电影数，返回带有指定数量的List容器
+示例：类似于影院搜索
+public static List<TB_MOVIEINFO> SearchMovie(string key)
+按照关键词搜索电影，关键词可以是名字、别名、导演、演员，返回所有符合条件的电影组成的list
+
+persist delete update均已实现
+
+TB_MOVIECRITIC
+public static DataTable getAllComments(string movieName)
+返回某一部电影的所有评论；传入参数为电影名字；当参数等于””时返回所有电影的评论
+
+persist delete已实现
+public void persist(decimal userId)
+当评论是会员用户所写时，传入会员的ID
+
+
+TB_ACTIVITYINFO
+
+public static List<TB_ACTIVITYINFO> GetActivityList()
+返回所有活动，以List存放
+public static  DataTable GetActivityTable()
+返回所有活动，以DataTable存放
+persist已实现
+public static void delete(decimal id)	public void delete()
+
+
+TB_THEATERCRITIC
+与TB_MOVIECRITIC完全一致
